@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\cliente;
+use App\ciudad;
+use App\Http\Requests\ClienteRequest;
 use Illuminate\Http\Request;
 
 class ClienteController extends Controller
@@ -14,7 +16,8 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        //
+        $cliente = cliente::orderBy('nombre_clase', 'asc')->paginate(20);
+        return view('clientes.index', compact('cliente'));
     }
 
     /**
@@ -24,7 +27,8 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        //
+        $ciudad = ciudad::pluck('id', 'id');
+        return view('clientes.create', compact('ciudad'));
     }
 
     /**
@@ -33,9 +37,17 @@ class ClienteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ClienteRequest $request)
     {
-        //
+        $cliente = new cliente();
+        $cliente->nit = $request->nit;
+        $cliente->razon_social = $request->razon_social;
+        $cliente->telefono = $request->telefono;
+        $cliente->direccion = $request->direccion;
+        $cliente->ciudad_id = $request->ciudad_id;
+
+        $cliente->save();
+        return redirect()->route('clientes.index', $cliente)->with('info', 'Fue creado exitosamente'); 
     }
 
     /**
@@ -46,7 +58,7 @@ class ClienteController extends Controller
      */
     public function show(cliente $cliente)
     {
-        //
+        return view('clientes.show', compact('clientes'));
     }
 
     /**
@@ -57,7 +69,8 @@ class ClienteController extends Controller
      */
     public function edit(cliente $cliente)
     {
-        //
+        $ciudad = ciudad::pluck('id', 'id');
+        return view('clientes.edit', compact('cliente', 'ciudad'));
     }
 
     /**
@@ -67,9 +80,16 @@ class ClienteController extends Controller
      * @param  \App\cliente  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, cliente $cliente)
+    public function update(ClienteRequest $request, cliente $cliente)
     {
-        //
+        $cliente->nit = $request->nit;
+        $cliente->razon_social = $request->razon_social;
+        $cliente->telefono = $request->telefono;
+        $cliente->direccion = $request->direccion;
+        $cliente->ciudad_id = $request->ciudad_id;
+
+        $cliente->save();
+        return redirect()->route('clientes.index', $cliente)->with('info', 'Fue creado exitosamente'); 
     }
 
     /**
@@ -80,6 +100,7 @@ class ClienteController extends Controller
      */
     public function destroy(cliente $cliente)
     {
-        //
+        $cliente->delete();
+        return back()->with('info', 'la clase fue eliminada');
     }
 }

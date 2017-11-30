@@ -14,11 +14,15 @@ class CreateProductosTable extends Migration
     public function up()
     {
         Schema::create('productos', function (Blueprint $table) {
-            $table->integer('codigo_producto')->primary();
+            $table->increments('id');
+            $table->integer('codigo_producto')->unique();
             $table->string('descripcion');
-            $table->integer('clase_producto');
+            $table->integer('clase_id')->unsigned();
             $table->integer('precio');
-            $table->foreign('clase_producto')->references('codigo_clase')->on('clases');
+
+            
+            $table->foreign('clase_id')->references('id')->on('clases');
+            $table->timestamps();
         });
     }
 

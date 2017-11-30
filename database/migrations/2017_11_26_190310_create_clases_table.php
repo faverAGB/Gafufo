@@ -14,8 +14,10 @@ class CreateClasesTable extends Migration
     public function up()
     {
         Schema::create('clases', function (Blueprint $table) {
-            $table->integer('codigo_clase')->primary();
+            $table->increments('id');
+            $table->integer('codigo_clase')->unique();
             $table->string('nombre_clase');
+            $table->timestamps();
         });
     }
 

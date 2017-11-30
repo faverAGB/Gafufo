@@ -14,13 +14,17 @@ class CreateDetallePedidosTable extends Migration
     public function up()
     {
         Schema::create('detalle_pedidos', function (Blueprint $table) {
-            $table->integer('codigo_producto');
-            $table->integer('codigo_pedido');
+            $table->integer('producto_id')->unsigned();
+            $table->integer('pedido_id')->unsigned();
             $table->integer('cantidad_producto');
             $table->integer('costo_total');
-            $table->foreign('codigo_producto')->references('codigo_producto')->on('productos');
-            $table->foreign('codigo_pedido')->references('codigo_pedido')->on('pedidos');
-            $table->primary(['codigo_producto', 'cantidad_producto']);
+            $table->timestamps();
+
+
+            $table->foreign('producto_id')->references('id')->on('productos');
+            $table->foreign('pedido_id')->references('id')->on('pedidos');
+
+            $table->primary(['producto_id', 'pedido_id']);
         });
     }
 

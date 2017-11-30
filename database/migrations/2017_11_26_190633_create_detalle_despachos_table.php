@@ -14,13 +14,16 @@ class CreateDetalleDespachosTable extends Migration
     public function up()
     {
         Schema::create('detalle_despachos', function (Blueprint $table) {
-            $table->integer('codigo_producto');
-            $table->integer('codigo_despacho');
+            $table->integer('producto_id')->unsigned();
+            $table->integer('despacho_id')->unsigned();
             $table->integer('cantidad_producto');
             $table->integer('costo_total');
-            $table->foreign('codigo_producto')->references('codigo_producto')->on('productos');
-            $table->foreign('codigo_despacho')->references('codigo_despacho')->on('despachos');
-            $table->primary(['codigo_producto', 'cantidad_producto']);
+
+
+            $table->foreign('producto_id')->references('id')->on('productos');
+            $table->foreign('despacho_id')->references('id')->on('despachos');
+            
+            $table->primary(['producto_id', 'despacho_id']);
         });
     }
 

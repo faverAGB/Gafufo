@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\clase;
+use App\Http\Requests\ClaseRequest;
 use Illuminate\Http\Request;
 
 class ClaseController extends Controller
@@ -14,7 +15,8 @@ class ClaseController extends Controller
      */
     public function index()
     {
-        //
+         $clase = clase::orderBy('nombre_clase', 'asc')->paginate(20);
+        return view('clases.index', compact('clase'));
     }
 
     /**
@@ -24,7 +26,7 @@ class ClaseController extends Controller
      */
     public function create()
     {
-        //
+        return view('clases.create');  
     }
 
     /**
@@ -33,9 +35,14 @@ class ClaseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ClaseRequest $request)
     {
-        //
+        $clase = new clase();
+        $clase->codigo_clase = $request->codigo_clase;
+        $clase->nombre_clase = $request->nombre_clase;
+
+        $clase->save();
+        return redirect()->route('clases.index', $clase)->with('info', 'Fue creado exitosamente'); 
     }
 
     /**
@@ -46,7 +53,7 @@ class ClaseController extends Controller
      */
     public function show(clase $clase)
     {
-        //
+        return view('clases.show', compact('clase'));
     }
 
     /**
@@ -57,7 +64,7 @@ class ClaseController extends Controller
      */
     public function edit(clase $clase)
     {
-        //
+        return view('clases.edit', compact('clase'));
     }
 
     /**
@@ -67,9 +74,13 @@ class ClaseController extends Controller
      * @param  \App\clase  $clase
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, clase $clase)
+    public function update(ClaseRequest $request, clase $clase)
     {
-        //
+        $clase->codigo_clase = $request->codigo_clase;
+        $clase->nombre_clase = $request->nombre_clase;
+
+        $clase->save();
+        return redirect()->route('clases.index', $clase)->with('info', 'Fue actualizado exitosamente');
     }
 
     /**
@@ -80,6 +91,7 @@ class ClaseController extends Controller
      */
     public function destroy(clase $clase)
     {
-        //
+        $clase->delete();
+        return back()->with('info', 'la clase fue eliminada');
     }
 }

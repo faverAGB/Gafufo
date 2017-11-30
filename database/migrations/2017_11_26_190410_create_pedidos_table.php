@@ -14,15 +14,19 @@ class CreatePedidosTable extends Migration
     public function up()
     {
         Schema::create('pedidos', function (Blueprint $table) {
-            $table->integer('codigo_pedido')->primary();
-            $table->integer('codigo_cliente');
-            $table->integer('codigo_proveedor');
+            $table->increments('id');
+            $table->integer('codigo_pedido')->unique();
+            $table->integer('cliente_id')->unsigned();
+            $table->integer('proveedor_id')->unsigned();
             $table->date('fecha_elaboracion');
             $table->date('fecha_entrega');
-            $table->integer('codigo_ciudad');
-            $table->foreign('codigo_ciudad')->references('codigo_postal')->on('ciudads');
-            $table->foreign('codigo_cliente')->references('nit')->on('clientes');
-            $table->foreign('codigo_proveedor')->references('nit')->on('proveedors');
+            $table->integer('ciudad_id')->unsigned();
+
+            
+            $table->foreign('ciudad_id')->references('id')->on('ciudads');
+            $table->foreign('cliente_id')->references('id')->on('clientes');
+            $table->foreign('proveedor_id')->references('id')->on('proveedors');
+            $table->timestamps();
         });
     }
 

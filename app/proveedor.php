@@ -6,10 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class proveedor extends Model
 {
-    protected $fillable=[
-	    'codigo_producto',
-		'descripcion',
-		'clase_producto',
-		'precio',
-];
+    protected $fillable = [
+	    'nit', 'razon_social', 'telefono', 'direccion',	'ciudad_id',
+	];
 }

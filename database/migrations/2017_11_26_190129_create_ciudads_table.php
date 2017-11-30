@@ -14,8 +14,10 @@ class CreateCiudadsTable extends Migration
     public function up()
     {
         Schema::create('ciudads', function (Blueprint $table) {
-            $table->integer('codigo_postal')->primary();
+            $table->increments('id');
+            $table->integer('codigo_postal')->unique();
             $table->string('nombre_ciudad');
+            $table->timestamps();
         });
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\ciudad;
+use App\Http\Requests\CiudadRequest;
 use Illuminate\Http\Request;
 
 class CiudadController extends Controller
@@ -14,7 +15,8 @@ class CiudadController extends Controller
      */
     public function index()
     {
-        //
+        $ciudad = ciudad::orderBy('nombre_ciudad', 'asc')->paginate(20);
+        return view('ciudads.index', compact('ciudad'));
     }
 
     /**
@@ -24,7 +26,7 @@ class CiudadController extends Controller
      */
     public function create()
     {
-        //
+        return view('ciudads.create');    
     }
 
     /**
@@ -33,9 +35,14 @@ class CiudadController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CiudadRequest $request)
     {
-        //
+        $ciudad = new ciudad();
+        $ciudad->codigo_postal = $request->codigo_postal;
+        $ciudad->nombre_ciudad = $request->nombre_ciudad;
+
+        $ciudad->save();
+        return redirect()->route('ciudads.index', $ciudad)->with('info', 'Fue creado exitosamente'); 
     }
 
     /**
@@ -46,7 +53,7 @@ class CiudadController extends Controller
      */
     public function show(ciudad $ciudad)
     {
-        //
+        return view('ciudads.show', compact('ciudad'));
     }
 
     /**
@@ -57,7 +64,7 @@ class CiudadController extends Controller
      */
     public function edit(ciudad $ciudad)
     {
-        //
+        return view('ciudads.edit', compact('ciudad'));    
     }
 
     /**
@@ -67,9 +74,13 @@ class CiudadController extends Controller
      * @param  \App\ciudad  $ciudad
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ciudad $ciudad)
+    public function update(CiudadRequest $request, ciudad $ciudad)
     {
-        //
+        $ciudad->codigo_postal = $request->codigo_postal;
+        $ciudad->nombre_ciudad = $request->nombre_ciudad;
+
+        $ciudad->save();
+        return redirect()->route('ciudads.index', $ciudad)->with('info', 'Fue actualizado exitosamente');
     }
 
     /**
@@ -80,6 +91,7 @@ class CiudadController extends Controller
      */
     public function destroy(ciudad $ciudad)
     {
-        //
+        $ciudad->delete();
+        return back()->with('info', 'la ciudad fue eliminada');
     }
 }
