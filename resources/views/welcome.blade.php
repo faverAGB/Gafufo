@@ -83,12 +83,11 @@
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
                     <a href="{{Route('ciudads.index')}}">ciudad</a>
                     <a href="{{Route('clases.index')}}">clase</a>
                     <a href="{{Route('clientes.index')}}">clientes</a>
+                    <a href="{{Route('proveedors.index')}}">Proveedores</a>
+                    <a href="{{Route('productos.index')}}">Productos</a>
                 </div>
             </div>
         </div>

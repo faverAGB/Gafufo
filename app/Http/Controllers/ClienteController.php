@@ -16,7 +16,7 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        $cliente = cliente::orderBy('nombre_clase', 'asc')->paginate(20);
+        $cliente = cliente::orderBy('razon_social', 'asc')->with('ciudad')->paginate(20);
         return view('clientes.index', compact('cliente'));
     }
 
@@ -27,7 +27,7 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        $ciudad = ciudad::pluck('id', 'id');
+        $ciudad = ciudad::pluck('nombre_ciudad', 'id');
         return view('clientes.create', compact('ciudad'));
     }
 
@@ -47,7 +47,7 @@ class ClienteController extends Controller
         $cliente->ciudad_id = $request->ciudad_id;
 
         $cliente->save();
-        return redirect()->route('clientes.index', $cliente)->with('info', 'Fue creado exitosamente'); 
+        return redirect()->route('clientes.index', $cliente)->with('info', 'El cliente fue creado'); 
     }
 
     /**
@@ -58,7 +58,7 @@ class ClienteController extends Controller
      */
     public function show(cliente $cliente)
     {
-        return view('clientes.show', compact('clientes'));
+        return view('clientes.show', compact('cliente'));
     }
 
     /**
@@ -69,7 +69,7 @@ class ClienteController extends Controller
      */
     public function edit(cliente $cliente)
     {
-        $ciudad = ciudad::pluck('id', 'id');
+        $ciudad = ciudad::pluck('nombre_ciudad', 'id');
         return view('clientes.edit', compact('cliente', 'ciudad'));
     }
 
@@ -89,7 +89,7 @@ class ClienteController extends Controller
         $cliente->ciudad_id = $request->ciudad_id;
 
         $cliente->save();
-        return redirect()->route('clientes.index', $cliente)->with('info', 'Fue creado exitosamente'); 
+        return redirect()->route('clientes.index', $cliente)->with('info', 'el cliente fue actualizado'); 
     }
 
     /**
@@ -101,6 +101,6 @@ class ClienteController extends Controller
     public function destroy(cliente $cliente)
     {
         $cliente->delete();
-        return back()->with('info', 'la clase fue eliminada');
+        return back()->with('info', 'El cliente fue eliminado');
     }
 }

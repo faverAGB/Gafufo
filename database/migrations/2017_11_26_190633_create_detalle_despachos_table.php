@@ -17,7 +17,7 @@ class CreateDetalleDespachosTable extends Migration
             $table->integer('producto_id')->unsigned();
             $table->integer('despacho_id')->unsigned();
             $table->integer('cantidad_producto');
-            $table->integer('costo_total');
+            $table->integer('costo_subtotal');
 
 
             $table->foreign('producto_id')->references('id')->on('productos');

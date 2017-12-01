@@ -21,7 +21,7 @@
 					<tr>
 						<td>{{ $cliente1->nit }}</td>
 						<td>{{ $cliente1->razon_social }}</td>
-						<td>{{ $cliente1->ciudad_id }} - {{ $cliente1->ciudad->nombre_ciudad}}</td>
+						<td>{{ $cliente1->ciudad->nombre_ciudad }} </td>
 						<td>
 							<a href="{{ route('clientes.show', $cliente1) }}" type="button" class="btn btn-primary">Ver</a>
 						</td>

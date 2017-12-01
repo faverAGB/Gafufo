@@ -3,37 +3,37 @@
 @section('content')
 	<div class="col-md-6 col-md-offset-3">
 		<div class="panel-heading">
-			@include('clientes.fragmentos.info')
-            <h1 align="center"><b>Detalles del cliente {{ $cliente->razon_social}}</b></h1>
+			@include('proveedors.fragmentos.info')
+            <h1 align="center"><b>Detalles del Cliente {{ $proveedor->razon_social}}</b></h1>
 		</div>
 		<table class="table table-hover table-stripe table-bordered">
 			<tbody>
 				<tr>
 					<td class="bg-primary">Nit</td>
-					<td>{{ $cliente->nit }}</td>
+					<td>{{ $proveedor->nit }}</td>
 				</tr>
 				<tr>
 					<td class="bg-primary">Razon Social</td>
-					<td>{{ $cliente->razon_social }}</td>
+					<td>{{ $proveedor->razon_social }}</td>
 				</tr>
 				<tr>
 					<td class="bg-primary">Telefono</td>
-					<td>{{ $cliente->telefono }}</td>
+					<td>{{ $proveedor->telefono }}</td>
 				</tr>
 				<tr>
 					<td class="bg-primary">Direccion</td>
-					<td>{{ $cliente->direccion }}</td>
+					<td>{{ $proveedor->direccion }}</td>
 				</tr>
 				<tr>
 					<td class="bg-primary">ciudad</td>
-					<td>{{ $cliente->ciudad->nombre_ciudad }} </td>
+					<td>{{ $proveedor->ciudad->nombre_ciudad }} </td>
 				</tr>
 				<tr>					
 					<td>
-						<a href="{{ route('clientes.index') }}" class="btn btn-default pull-left">Clientes</a>
+						<a href="{{ route('proveedors.index') }}" class="btn btn-default pull-left">Proveedores</a>
 					</td>
 					<td>
-						<a href="{{ route('clientes.edit', $cliente) }}" class="btn btn-warning pull-left">Editar</a>
+						<a href="{{ route('proveedors.edit', $proveedor) }}" class="btn btn-warning pull-left">Editar</a>
 					</td>
 				</tr>
 			</tbody>

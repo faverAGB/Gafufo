@@ -17,7 +17,7 @@ class CreateDetallePedidosTable extends Migration
             $table->integer('producto_id')->unsigned();
             $table->integer('pedido_id')->unsigned();
             $table->integer('cantidad_producto');
-            $table->integer('costo_total');
+            $table->integer('costo_subtotal');
             $table->timestamps();
 
 

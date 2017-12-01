@@ -17,11 +17,13 @@ class CreateProductosTable extends Migration
             $table->increments('id');
             $table->integer('codigo_producto')->unique();
             $table->string('descripcion');
+            $table->integer('proveedor_id')->unsigned();
             $table->integer('clase_id')->unsigned();
             $table->integer('precio');
 
             
             $table->foreign('clase_id')->references('id')->on('clases');
+            $table->foreign('proveedor_id')->references('id')->on('proveedors');
             $table->timestamps();
         });
     }

@@ -4,7 +4,7 @@
 	<div class="col-sm-12">
 		<h2>
 			Ciudades
-			<a href="{{ route('ciudads.create') }}" class="btn btn-primary pull-right">Añadir Ciudad</a>
+			<a href="{{ route('ciudads.create') }}" class="btn btn-primary pull-right">Nueva Ciudad</a>
 		</h2>
 		@include('ciudads.fragmentos.info')
 		<table class="table table-hover table-striped ">

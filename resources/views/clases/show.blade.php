@@ -4,7 +4,7 @@
 	<div class="col-md-6 col-md-offset-3">
 		<div class="panel-heading">
 			@include('clases.fragmentos.info')
-            <h1 align="center"><b>Detalles de la clase {{ $clase->id }}</b></h1>
+            <h1 align="center"><b>Detalles de la clase {{ $clase->nombre_clase }}</b></h1>
 		</div>
 		<table class="table table-hover table-stripe table-bordered">
 			<thead class="bg-primary">

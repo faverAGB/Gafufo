@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\proveedor;
+use App\ciudad;
+use App\Http\Requests\ProveedorRequest;
 use Illuminate\Http\Request;
 
 class ProveedorController extends Controller
@@ -14,7 +16,8 @@ class ProveedorController extends Controller
      */
     public function index()
     {
-        //
+        $proveedor = proveedor::orderBy('razon_social', 'asc')->with('ciudad')->paginate(20);
+        return view('proveedors.index', compact('proveedor'));
     }
 
     /**
@@ -24,7 +27,8 @@ class ProveedorController extends Controller
      */
     public function create()
     {
-        //
+        $ciudad = ciudad::pluck('nombre_ciudad', 'id');
+        return view('proveedors.create', compact('ciudad'));
     }
 
     /**
@@ -33,9 +37,17 @@ class ProveedorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProveedorRequest $request)
     {
-        //
+        $proveedor = new proveedor();
+        $proveedor->nit = $request->nit;
+        $proveedor->razon_social = $request->razon_social;
+        $proveedor->telefono = $request->telefono;
+        $proveedor->direccion = $request->direccion;
+        $proveedor->ciudad_id = $request->ciudad_id;
+
+        $proveedor->save();
+        return redirect()->route('proveedors.index', $proveedor)->with('info', 'el proveedor fue creado'); 
     }
 
     /**
@@ -46,7 +58,7 @@ class ProveedorController extends Controller
      */
     public function show(proveedor $proveedor)
     {
-        //
+        return view('proveedors.show', compact('proveedor'));
     }
 
     /**
@@ -57,7 +69,8 @@ class ProveedorController extends Controller
      */
     public function edit(proveedor $proveedor)
     {
-        //
+        $ciudad = ciudad::pluck('nombre_ciudad', 'id');
+        return view('proveedors.edit', compact('proveedor', 'ciudad'));
     }
 
     /**
@@ -67,9 +80,16 @@ class ProveedorController extends Controller
      * @param  \App\proveedor  $proveedor
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, proveedor $proveedor)
+    public function update(ProveedorRequest $request, proveedor $proveedor)
     {
-        //
+        $proveedor->nit = $request->nit;
+        $proveedor->razon_social = $request->razon_social;
+        $proveedor->telefono = $request->telefono;
+        $proveedor->direccion = $request->direccion;
+        $proveedor->ciudad_id = $request->ciudad_id;
+
+        $proveedor->save();
+        return redirect()->route('proveedors.index', $proveedor)->with('info', 'el proveedor fue actualizado'); 
     }
 
     /**
@@ -80,6 +100,7 @@ class ProveedorController extends Controller
      */
     public function destroy(proveedor $proveedor)
     {
-        //
+        $proveedor->delete();
+        return back()->with('info', 'el proveedor fue eliminado');
     }
 }

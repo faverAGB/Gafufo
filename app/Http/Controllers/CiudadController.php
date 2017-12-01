@@ -42,7 +42,7 @@ class CiudadController extends Controller
         $ciudad->nombre_ciudad = $request->nombre_ciudad;
 
         $ciudad->save();
-        return redirect()->route('ciudads.index', $ciudad)->with('info', 'Fue creado exitosamente'); 
+        return redirect()->route('ciudads.index', $ciudad)->with('info', 'la ciudad fue creada'); 
     }
 
     /**
@@ -80,7 +80,7 @@ class CiudadController extends Controller
         $ciudad->nombre_ciudad = $request->nombre_ciudad;
 
         $ciudad->save();
-        return redirect()->route('ciudads.index', $ciudad)->with('info', 'Fue actualizado exitosamente');
+        return redirect()->route('ciudads.index', $ciudad)->with('info', 'la ciudad fue actualizada');
     }
 
     /**

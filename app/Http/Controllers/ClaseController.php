@@ -42,7 +42,7 @@ class ClaseController extends Controller
         $clase->nombre_clase = $request->nombre_clase;
 
         $clase->save();
-        return redirect()->route('clases.index', $clase)->with('info', 'Fue creado exitosamente'); 
+        return redirect()->route('clases.index', $clase)->with('info', 'la clase gue creada'); 
     }
 
     /**
@@ -80,7 +80,7 @@ class ClaseController extends Controller
         $clase->nombre_clase = $request->nombre_clase;
 
         $clase->save();
-        return redirect()->route('clases.index', $clase)->with('info', 'Fue actualizado exitosamente');
+        return redirect()->route('clases.index', $clase)->with('info', 'la clase fue actualizada');
     }
 
     /**

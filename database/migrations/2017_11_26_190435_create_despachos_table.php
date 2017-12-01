@@ -20,6 +20,7 @@ class CreateDespachosTable extends Migration
             $table->date('fecha_elaboracion');
             $table->date('fecha_entrega');
             $table->integer('ciudad_id')->unsigned();
+            $table->integer('total');
 
             
             $table->foreign('ciudad_id')->references('id')->on('ciudads');
