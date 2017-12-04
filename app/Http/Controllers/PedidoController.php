@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\pedido;
+use App\Pedido;
 use Illuminate\Http\Request;
 
 class PedidoController extends Controller
@@ -44,7 +44,7 @@ class PedidoController extends Controller
      * @param  \App\pedido  $pedido
      * @return \Illuminate\Http\Response
      */
-    public function show(pedido $pedido)
+    public function show(Pedido $pedido)
     {
         //
     }
@@ -55,7 +55,7 @@ class PedidoController extends Controller
      * @param  \App\pedido  $pedido
      * @return \Illuminate\Http\Response
      */
-    public function edit(pedido $pedido)
+    public function edit(Pedido $pedido)
     {
         //
     }
@@ -67,7 +67,7 @@ class PedidoController extends Controller
      * @param  \App\pedido  $pedido
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, pedido $pedido)
+    public function update(Request $request, Pedido $pedido)
     {
         //
     }
@@ -78,7 +78,7 @@ class PedidoController extends Controller
      * @param  \App\pedido  $pedido
      * @return \Illuminate\Http\Response
      */
-    public function destroy(pedido $pedido)
+    public function destroy(Pedido $pedido)
     {
         //
     }

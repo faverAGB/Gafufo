@@ -11,69 +11,92 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
+     <link href="{{ asset('css/mdb.css') }}" rel="stylesheet">
+     <link rel="stylesheet" href="{{ asset('css/font-awesome.css') }}" type="text/css">
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
-
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
+      <nav class="navbar navbar-expand-lg navbar-dark indigo">
+     <a class="navbar-brand" href="{{ url('/') }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>
-                </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+   <div class="collapse navbar-collapse" id="navbarNav1">
+        @if (Auth::guest())
+        <ul class="navbar-nav mr-auto">
+        </ul>
+        @else
+        <ul class="navbar-nav mr-auto">
+ <li class="nav-item waves-effect">
+                    <a class="nav-link waves-effect" href="{{ URL::to('home') }}"><i class="fa fa-home left"></i>&nbsp;Pagina Principal</a>
+                </li>
 
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
+                 <li class="nav-item waves-effect">
+                    <a class="nav-link waves-effect" href="{{ Route('clases.index') }}"><i class="fa fa-clipboard left"></i>&nbsp;Clases</a>
+                </li>
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
+                 <li class="nav-item waves-effect">
+                    <a class="nav-link waves-effect" href="{{ Route('ciudads.index') }}"><i class="fa fa-map-marker left"></i>&nbsp;Ciudades</a>
+                </li>
+
+                 <li class="nav-item waves-effect">
+                    <a class="nav-link waves-effect" href="{{ Route('clientes.index') }}"><i class="fa fa-user left"></i>&nbsp;Clientes</a>
+                </li>
+
+                 <li class="nav-item waves-effect">
+                    <a class="nav-link waves-effect" href="{{ Route('proveedors.index') }}"><i class="fa fa-users left"></i>&nbsp;Proveedores</a>
+                </li>
+                </ul>
+        @endif
+        <ul class="navbar-nav nav-flex-left">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Login</a></li>
+                           <li class="nav-item waves-effect">
+                        <a id="ir" class="nav-link waves-effect" href="{{ route('login') }}"><i class="fa fa-sign-in left"></i>&nbsp;Login</a>
+                </li>
                         @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}"
+                             <li class="nav-item dropdown  btn-group">
+                    <a class="nav-link dropdown-toggle waves-effect" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><strong><i class="fa fa-user-circle left"></i>&nbsp;{{ Auth::user()->name }}</strong></a>
+                    <div class="dropdown-menu dropdown" aria-labelledby="dropdownMenu1">
+                         <a class="dropdown-item waves-effect " href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            Logout
+                                         <i class="fa fa-sign-out left"></i>&nbsp;Cerrar Sesion</a>
                                         </a>
 
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                         </form>
-                                    </li>
-                                </ul>
-                            </li>
+                    </div>
+                </li>
                         @endif
                     </ul>
-                </div>
-            </div>
-        </nav>
+    </div>
+</nav>
+           
 
         @yield('content')
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    
+    <script type="text/javascript" src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
+
+    <!-- Bootstrap dropdown -->
+    <script type="text/javascript" src="{{ asset('js/popper.min.js') }}"></script>
+
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
+
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="{{ asset('js/mdb.min.js') }}"></script>
+     <script>
+    new WOW().init();
+    </script>
+
 </body>
 </html>

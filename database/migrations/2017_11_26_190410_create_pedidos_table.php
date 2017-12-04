@@ -17,7 +17,6 @@ class CreatePedidosTable extends Migration
             $table->increments('id');
             $table->integer('codigo_pedido')->unique();
             $table->integer('cliente_id')->unsigned();
-            $table->integer('proveedor_id')->unsigned();
             $table->date('fecha_elaboracion');
             $table->date('fecha_entrega');
             $table->integer('ciudad_id')->unsigned();
@@ -26,7 +25,6 @@ class CreatePedidosTable extends Migration
             
             $table->foreign('ciudad_id')->references('id')->on('ciudads');
             $table->foreign('cliente_id')->references('id')->on('clientes');
-            $table->foreign('proveedor_id')->references('id')->on('proveedors');
             $table->timestamps();
         });
     }

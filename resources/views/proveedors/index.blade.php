@@ -13,7 +13,7 @@
 					<th>Nit</th>
 					<th>Razon Social</th>
 					<th>Ciudad</th>
-					<th colspan="3">&nbsp;</th>
+					<th colspan="2">&nbsp;</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -28,13 +28,13 @@
 						<td>
 							<a href="{{ route('proveedors.edit', $proveedor1) }}" type="button" class="btn btn-warning">Editar</a>
 						</td>
-						<td>
+						<!-- <td>
 							<form action="{{ route('proveedors.destroy', $proveedor1) }}" method="POST">
 								{{ csrf_field() }}
 								<input type="hidden" name="_method" value="DELETE">
 								<button class="btn btn-danger">Eliminar</button>
 							</form>
-                		</td>
+                		</td> -->
 					</tr>
 				@endforeach
 			</tbody>

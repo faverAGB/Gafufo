@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\proveedor;
-use App\ciudad;
+use App\Proveedor;
+use App\Ciudad;
 use App\Http\Requests\ProveedorRequest;
 use Illuminate\Http\Request;
 
@@ -16,7 +16,7 @@ class ProveedorController extends Controller
      */
     public function index()
     {
-        $proveedor = proveedor::orderBy('razon_social', 'asc')->with('ciudad')->paginate(20);
+        $proveedor = Proveedor::orderBy('razon_social', 'asc')->with('ciudad')->paginate(20);
         return view('proveedors.index', compact('proveedor'));
     }
 
@@ -27,7 +27,7 @@ class ProveedorController extends Controller
      */
     public function create()
     {
-        $ciudad = ciudad::pluck('nombre_ciudad', 'id');
+        $ciudad = Ciudad::pluck('nombre_ciudad', 'id');
         return view('proveedors.create', compact('ciudad'));
     }
 
@@ -39,7 +39,7 @@ class ProveedorController extends Controller
      */
     public function store(ProveedorRequest $request)
     {
-        $proveedor = new proveedor();
+        $proveedor = new Proveedor();
         $proveedor->nit = $request->nit;
         $proveedor->razon_social = $request->razon_social;
         $proveedor->telefono = $request->telefono;
@@ -56,7 +56,7 @@ class ProveedorController extends Controller
      * @param  \App\proveedor  $proveedor
      * @return \Illuminate\Http\Response
      */
-    public function show(proveedor $proveedor)
+    public function show(Proveedor $proveedor)
     {
         return view('proveedors.show', compact('proveedor'));
     }
@@ -67,9 +67,9 @@ class ProveedorController extends Controller
      * @param  \App\proveedor  $proveedor
      * @return \Illuminate\Http\Response
      */
-    public function edit(proveedor $proveedor)
+    public function edit(Proveedor $proveedor)
     {
-        $ciudad = ciudad::pluck('nombre_ciudad', 'id');
+        $ciudad = Ciudad::pluck('nombre_ciudad', 'id');
         return view('proveedors.edit', compact('proveedor', 'ciudad'));
     }
 
@@ -80,7 +80,7 @@ class ProveedorController extends Controller
      * @param  \App\proveedor  $proveedor
      * @return \Illuminate\Http\Response
      */
-    public function update(ProveedorRequest $request, proveedor $proveedor)
+    public function update(ProveedorRequest $request, Proveedor $proveedor)
     {
         $proveedor->nit = $request->nit;
         $proveedor->razon_social = $request->razon_social;
@@ -98,7 +98,7 @@ class ProveedorController extends Controller
      * @param  \App\proveedor  $proveedor
      * @return \Illuminate\Http\Response
      */
-    public function destroy(proveedor $proveedor)
+    public function destroy(Proveedor $proveedor)
     {
         $proveedor->delete();
         return back()->with('info', 'el proveedor fue eliminado');

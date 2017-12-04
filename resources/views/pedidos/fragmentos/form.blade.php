@@ -13,6 +13,7 @@
 <div class="form-group">
     {!! Form::label('clase_id', 'Clase') !!}
     {!! Form::select('clase_id', $clase, null, ['class' => 'form-control']) !!}
+</div>	
 </div>
 <div class="form-group">
     {!! Form::label('precio', 'Preocio') !!}

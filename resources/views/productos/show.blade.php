@@ -25,7 +25,7 @@
 					<td>{{ $producto->clase->nombre_clase }}</td>
 				</tr>
 				<tr>
-					<td class="bg-primary">ciudad</td>
+					<td class="bg-primary">Precio</td>
 					<td>{{ $producto->precio }} </td>
 				</tr>
 				<tr>					

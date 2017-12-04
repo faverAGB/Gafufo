@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\cliente;
-use App\ciudad;
+use App\Cliente;
+use App\Ciudad;
 use App\Http\Requests\ClienteRequest;
 use Illuminate\Http\Request;
 
@@ -16,7 +16,7 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        $cliente = cliente::orderBy('razon_social', 'asc')->with('ciudad')->paginate(20);
+        $cliente = Cliente::orderBy('razon_social', 'asc')->with('ciudad')->paginate(20);
         return view('clientes.index', compact('cliente'));
     }
 
@@ -27,7 +27,7 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        $ciudad = ciudad::pluck('nombre_ciudad', 'id');
+        $ciudad = Ciudad::pluck('nombre_ciudad', 'id');
         return view('clientes.create', compact('ciudad'));
     }
 
@@ -39,7 +39,7 @@ class ClienteController extends Controller
      */
     public function store(ClienteRequest $request)
     {
-        $cliente = new cliente();
+        $cliente = new Cliente();
         $cliente->nit = $request->nit;
         $cliente->razon_social = $request->razon_social;
         $cliente->telefono = $request->telefono;
@@ -56,7 +56,7 @@ class ClienteController extends Controller
      * @param  \App\cliente  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function show(cliente $cliente)
+    public function show(Cliente $cliente)
     {
         return view('clientes.show', compact('cliente'));
     }
@@ -67,9 +67,9 @@ class ClienteController extends Controller
      * @param  \App\cliente  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function edit(cliente $cliente)
+    public function edit(Cliente $cliente)
     {
-        $ciudad = ciudad::pluck('nombre_ciudad', 'id');
+        $ciudad = Ciudad::pluck('nombre_ciudad', 'id');
         return view('clientes.edit', compact('cliente', 'ciudad'));
     }
 
@@ -80,7 +80,7 @@ class ClienteController extends Controller
      * @param  \App\cliente  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function update(ClienteRequest $request, cliente $cliente)
+    public function update(ClienteRequest $request, Cliente $cliente)
     {
         $cliente->nit = $request->nit;
         $cliente->razon_social = $request->razon_social;
@@ -98,7 +98,7 @@ class ClienteController extends Controller
      * @param  \App\cliente  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function destroy(cliente $cliente)
+    public function destroy(Cliente $cliente)
     {
         $cliente->delete();
         return back()->with('info', 'El cliente fue eliminado');

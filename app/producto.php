@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class producto extends Model
+class Producto extends Model
 {
     protected $fillable = [
 	    'codigo_producto', 'descripcion', 'proveedor_id', 'clase_id', 'precio',
@@ -12,10 +12,10 @@ class producto extends Model
 
 	public function proveedor()
     {
-        return $this->belongsTo('App\proveedor', 'proveedor_id');
+        return $this->belongsTo('App\Proveedor', 'proveedor_id');
     }
     public function clase()
     {
-        return $this->belongsTo('App\clase', 'clase_id');
+        return $this->belongsTo('App\Clase', 'clase_id');
     }
 }

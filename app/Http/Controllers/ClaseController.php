@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\clase;
+use App\Clase;
 use App\Http\Requests\ClaseRequest;
 use Illuminate\Http\Request;
 
@@ -15,7 +15,7 @@ class ClaseController extends Controller
      */
     public function index()
     {
-         $clase = clase::orderBy('nombre_clase', 'asc')->paginate(20);
+         $clase = Clase::orderBy('nombre_clase', 'asc')->paginate(20);
         return view('clases.index', compact('clase'));
     }
 
@@ -37,7 +37,7 @@ class ClaseController extends Controller
      */
     public function store(ClaseRequest $request)
     {
-        $clase = new clase();
+        $clase = new Clase();
         $clase->codigo_clase = $request->codigo_clase;
         $clase->nombre_clase = $request->nombre_clase;
 
@@ -51,7 +51,7 @@ class ClaseController extends Controller
      * @param  \App\clase  $clase
      * @return \Illuminate\Http\Response
      */
-    public function show(clase $clase)
+    public function show(Clase $clase)
     {
         return view('clases.show', compact('clase'));
     }
@@ -62,7 +62,7 @@ class ClaseController extends Controller
      * @param  \App\clase  $clase
      * @return \Illuminate\Http\Response
      */
-    public function edit(clase $clase)
+    public function edit(Clase $clase)
     {
         return view('clases.edit', compact('clase'));
     }
@@ -74,7 +74,7 @@ class ClaseController extends Controller
      * @param  \App\clase  $clase
      * @return \Illuminate\Http\Response
      */
-    public function update(ClaseRequest $request, clase $clase)
+    public function update(ClaseRequest $request, Clase $clase)
     {
         $clase->codigo_clase = $request->codigo_clase;
         $clase->nombre_clase = $request->nombre_clase;
@@ -89,7 +89,7 @@ class ClaseController extends Controller
      * @param  \App\clase  $clase
      * @return \Illuminate\Http\Response
      */
-    public function destroy(clase $clase)
+    public function destroy(Clase $clase)
     {
         $clase->delete();
         return back()->with('info', 'la clase fue eliminada');

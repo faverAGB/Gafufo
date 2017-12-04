@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\producto;
-use App\clase;
-use App\proveedor;
+use App\Producto;
+use App\Clase;
+use App\Proveedor;
 use App\Http\Requests\ProductoRequest;
 use Illuminate\Http\Request;
 
@@ -17,7 +17,7 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        $producto = producto::orderBy('descripcion', 'asc')->with('clase', 'proveedor')->paginate(20);
+        $producto = Producto::orderBy('descripcion', 'asc')->with('clase', 'proveedor')->paginate(20);
         return view('productos.index', compact('producto'));
     }
 
@@ -28,8 +28,8 @@ class ProductoController extends Controller
      */
     public function create()
     {
-        $clase = clase::pluck('nombre_clase', 'id');
-        $proveedor = proveedor::pluck('razon_social', 'id');
+        $clase = Clase::pluck('nombre_clase', 'id');
+        $proveedor = Proveedor::pluck('razon_social', 'id');
         return view('productos.create', compact('clase', 'proveedor'));
     }
 
@@ -41,7 +41,7 @@ class ProductoController extends Controller
      */
     public function store(ProductoRequest $request)
     {
-        $producto = new producto();
+        $producto = new Producto();
         $producto->codigo_producto = $request->codigo_producto;
         $producto->descripcion = $request->descripcion;
         $producto->proveedor_id = $request->proveedor_id;
@@ -58,7 +58,7 @@ class ProductoController extends Controller
      * @param  \App\producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function show(producto $producto)
+    public function show(Producto $producto)
     {
         return view('productos.show', compact('producto'));
     }
@@ -69,10 +69,10 @@ class ProductoController extends Controller
      * @param  \App\producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function edit(producto $producto)
+    public function edit(Producto $producto)
     {
-        $clase = clase::pluck('nombre_clase', 'id');
-        $proveedor = proveedor::pluck('razon_social', 'id');
+        $clase = Clase::pluck('nombre_clase', 'id');
+        $proveedor = Proveedor::pluck('razon_social', 'id');
         return view('productos.edit', compact('producto', 'clase', 'proveedor'));
     }
 
@@ -83,7 +83,7 @@ class ProductoController extends Controller
      * @param  \App\producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function update(ProductoRequest $request, producto $producto)
+    public function update(ProductoRequest $request, Producto $producto)
     {
         $producto->codigo_producto = $request->codigo_producto;
         $producto->descripcion = $request->descripcion;
@@ -101,7 +101,7 @@ class ProductoController extends Controller
      * @param  \App\producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function destroy(producto $producto)
+    public function destroy(Producto $producto)
     {
         $producto->delete();
         return back()->with('info', 'el producto fue eliminado');

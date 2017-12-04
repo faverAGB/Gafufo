@@ -14,8 +14,8 @@ class CreateDetalleDespachosTable extends Migration
     public function up()
     {
         Schema::create('detalle_despachos', function (Blueprint $table) {
-            $table->integer('producto_id')->unsigned();
             $table->integer('despacho_id')->unsigned();
+            $table->integer('producto_id')->unsigned();
             $table->integer('cantidad_producto');
             $table->integer('costo_subtotal');
 

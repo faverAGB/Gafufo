@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\ciudad;
+use App\Ciudad;
 use App\Http\Requests\CiudadRequest;
 use Illuminate\Http\Request;
 
@@ -15,7 +15,7 @@ class CiudadController extends Controller
      */
     public function index()
     {
-        $ciudad = ciudad::orderBy('nombre_ciudad', 'asc')->paginate(20);
+        $ciudad = Ciudad::orderBy('nombre_ciudad', 'asc')->paginate(20);
         return view('ciudads.index', compact('ciudad'));
     }
 
@@ -37,7 +37,7 @@ class CiudadController extends Controller
      */
     public function store(CiudadRequest $request)
     {
-        $ciudad = new ciudad();
+        $ciudad = new Ciudad();
         $ciudad->codigo_postal = $request->codigo_postal;
         $ciudad->nombre_ciudad = $request->nombre_ciudad;
 
@@ -51,7 +51,7 @@ class CiudadController extends Controller
      * @param  \App\ciudad  $ciudad
      * @return \Illuminate\Http\Response
      */
-    public function show(ciudad $ciudad)
+    public function show(Ciudad $ciudad)
     {
         return view('ciudads.show', compact('ciudad'));
     }
@@ -62,7 +62,7 @@ class CiudadController extends Controller
      * @param  \App\ciudad  $ciudad
      * @return \Illuminate\Http\Response
      */
-    public function edit(ciudad $ciudad)
+    public function edit(Ciudad $ciudad)
     {
         return view('ciudads.edit', compact('ciudad'));    
     }
@@ -74,7 +74,7 @@ class CiudadController extends Controller
      * @param  \App\ciudad  $ciudad
      * @return \Illuminate\Http\Response
      */
-    public function update(CiudadRequest $request, ciudad $ciudad)
+    public function update(CiudadRequest $request, Ciudad $ciudad)
     {
         $ciudad->codigo_postal = $request->codigo_postal;
         $ciudad->nombre_ciudad = $request->nombre_ciudad;
@@ -89,7 +89,7 @@ class CiudadController extends Controller
      * @param  \App\ciudad  $ciudad
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ciudad $ciudad)
+    public function destroy(Ciudad $ciudad)
     {
         $ciudad->delete();
         return back()->with('info', 'la ciudad fue eliminada');
